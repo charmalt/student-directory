@@ -72,8 +72,12 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: get_cohort}
-    puts "Now we have #{students.count} students"
+    students << {name: name, cohort: get_cohort, height: get_height, hobby: get_hobby}
+    if students.count <= 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
     name = gets.chomp
   end
@@ -90,6 +94,18 @@ def get_cohort
   return cohort.to_sym
 end
 
+def get_hobby
+  hobby = ""
+  puts "Please enter hobby: "
+  return gets.chomp!
+end
+
+def get_height
+  hobby = ""
+  puts "Please enter height: "
+  return gets.chomp!
+end
+
 def print_by_cohort(students)
   cohorts = ["november", "february", "april"]
   cohorts.each do |cohort|
@@ -103,7 +119,7 @@ def print_by_cohort(students)
 end
 
 #nothing happens until we call the methods
-# students = input_students
+students = input_students
 print_header
 print(students)
 print_footer(students)
