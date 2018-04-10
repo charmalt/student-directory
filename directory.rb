@@ -1,18 +1,18 @@
 student_count = 0
 
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november, height: '5\'11', hobby: "eating"},
-  {name: "Darth Vader", cohort: :november, height: '5\'7', hobby: "pilates"},
-  {name: "Nurse Ratched", cohort: :november, height: '5\'1', hobby: "yoga"},
-  {name: "Michael Corleone", cohort: :november, height: '6\'4', hobby: "planning"},
-  {name: "Alex DeLarge", cohort: :november, height: '5\'2', hobby: "crossfit"},
-  {name: "The Wicked Witch of the West", cohort: :november,height: '6\'2', hobby: "meditation"},
-  {name: "Terminator", cohort: :november, height: '6\'7', hobby: "climbing"},
-  {name: "Freddy Krueger", cohort: :november, height: '5\'11', hobby: "skiing"},
-  {name: "The Joker", cohort: :november, height: '5\'11', hobby: "gaming"},
-  {name: "Joffrey Baratheon", cohort: :november, height: '5\'3', hobby: "knitting"},
-  {name: "Norman Bates", cohort: :november, height: '6\'3', hobby: "travelling"}
-]
+# students = [
+#   {name: "Dr. Hannibal Lecter", cohort: :november, height: '5\'11', hobby: "eating"},
+#   {name: "Darth Vader", cohort: :november, height: '5\'7', hobby: "pilates"},
+#   {name: "Nurse Ratched", cohort: :november, height: '5\'1', hobby: "yoga"},
+#   {name: "Michael Corleone", cohort: :november, height: '6\'4', hobby: "planning"},
+#   {name: "Alex DeLarge", cohort: :november, height: '5\'2', hobby: "crossfit"},
+#   {name: "The Wicked Witch of the West", cohort: :november,height: '6\'2', hobby: "meditation"},
+#   {name: "Terminator", cohort: :november, height: '6\'7', hobby: "climbing"},
+#   {name: "Freddy Krueger", cohort: :november, height: '5\'11', hobby: "skiing"},
+#   {name: "The Joker", cohort: :november, height: '5\'11', hobby: "gaming"},
+#   {name: "Joffrey Baratheon", cohort: :november, height: '5\'3', hobby: "knitting"},
+#   {name: "Norman Bates", cohort: :november, height: '6\'3', hobby: "travelling"}
+# ]
 
 def print_header
   puts "The students of Villains Academy"
@@ -72,7 +72,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: get_cohort}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -81,8 +81,17 @@ def input_students
   students
 end
 
+def get_cohort
+  cohort = ""
+  while (cohort!="november")&&(cohort!="february")&&(cohort!="april") do
+    puts "Please enter your cohort (november, february or april): "
+    cohort = gets.chomp!.downcase
+  end
+  return cohort.to_sym
+end
+
 #nothing happens until we call the methods
-# students = input_students
+students = input_students
 print_header
 print(students)
 print_footer(students)
