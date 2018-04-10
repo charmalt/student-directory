@@ -1,29 +1,36 @@
 def interactive_menu
-  students = []
+  @students = []
   student_count = 0
   loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" # 9 because we'll be adding more items
-    # 2. read the input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
-    when "1"
-      students = input_students(students)
-    when "2"
-      print_header
-      print(students)
-      print_footer(students)
-    when "9"
-      exit # this will cause the program to terminate
-    else
-      puts "I don't know what you meant, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def show_students
+  print_header
+  print(@students)
+  print_footer(@students)
+end
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "I don't know what you mean, try again"
+  end
+end
 # students = [
 #   {name: "Dr. Hannibal Lecter", cohort: :february, height: '5\'11', hobby: "eating"},
 #   {name: "Darth Vader", cohort: :november, height: '5\'7', hobby: "pilates"},
@@ -86,7 +93,7 @@ def print_footer(names)
   puts ""
 end
 
-def input_students(students)
+def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # get the first name
@@ -94,17 +101,17 @@ def input_students(students)
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: get_cohort, height: get_height, hobby: get_hobby}
-    if students.count <= 1
-      puts "Now we have #{students.count} student"
+    @students << {name: name, cohort: get_cohort, height: get_height, hobby: get_hobby}
+    if @students.count <= 1
+      puts "Now we have #{@students.count} student"
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{@students.count} students"
     end
     # get another name from the user
     name = gets.chomp
   end
   # return the array of students
-  students
+  @students
 end
 
 def get_cohort
