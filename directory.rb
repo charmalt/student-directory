@@ -1,18 +1,18 @@
 student_count = 0
 
-# students = [
-#   {name: "Dr. Hannibal Lecter", cohort: :november, height: '5\'11', hobby: "eating"},
-#   {name: "Darth Vader", cohort: :november, height: '5\'7', hobby: "pilates"},
-#   {name: "Nurse Ratched", cohort: :november, height: '5\'1', hobby: "yoga"},
-#   {name: "Michael Corleone", cohort: :november, height: '6\'4', hobby: "planning"},
-#   {name: "Alex DeLarge", cohort: :november, height: '5\'2', hobby: "crossfit"},
-#   {name: "The Wicked Witch of the West", cohort: :november,height: '6\'2', hobby: "meditation"},
-#   {name: "Terminator", cohort: :november, height: '6\'7', hobby: "climbing"},
-#   {name: "Freddy Krueger", cohort: :november, height: '5\'11', hobby: "skiing"},
-#   {name: "The Joker", cohort: :november, height: '5\'11', hobby: "gaming"},
-#   {name: "Joffrey Baratheon", cohort: :november, height: '5\'3', hobby: "knitting"},
-#   {name: "Norman Bates", cohort: :november, height: '6\'3', hobby: "travelling"}
-# ]
+students = [
+  {name: "Dr. Hannibal Lecter", cohort: :february, height: '5\'11', hobby: "eating"},
+  {name: "Darth Vader", cohort: :november, height: '5\'7', hobby: "pilates"},
+  {name: "Nurse Ratched", cohort: :april, height: '5\'1', hobby: "yoga"},
+  {name: "Michael Corleone", cohort: :november, height: '6\'4', hobby: "planning"},
+  {name: "Alex DeLarge", cohort: :february, height: '5\'2', hobby: "crossfit"},
+  {name: "The Wicked Witch of the West", cohort: :november,height: '6\'2', hobby: "meditation"},
+  {name: "Terminator", cohort: :april, height: '6\'7', hobby: "climbing"},
+  {name: "Freddy Krueger", cohort: :november, height: '5\'11', hobby: "skiing"},
+  {name: "The Joker", cohort: :november, height: '5\'11', hobby: "gaming"},
+  {name: "Joffrey Baratheon", cohort: :february, height: '5\'3', hobby: "knitting"},
+  {name: "Norman Bates", cohort: :november, height: '6\'3', hobby: "travelling"}
+]
 
 def print_header
   puts "The students of Villains Academy"
@@ -90,8 +90,20 @@ def get_cohort
   return cohort.to_sym
 end
 
+def print_by_cohort(students)
+  cohorts = ["november", "february", "april"]
+  cohorts.each do |cohort|
+    puts "#{cohort.capitalize} Cohort"
+    students.each do |student|
+      if student[:cohort].to_s == cohort
+        puts "#{student[:name].ljust(30)} #{student[:height].ljust(5)} #{student[:hobby].ljust(10)}"
+      end
+    end
+  end
+end
+
 #nothing happens until we call the methods
-students = input_students
+# students = input_students
 print_header
 print(students)
 print_footer(students)
@@ -102,3 +114,5 @@ puts("")
 print_using_while(students)
 puts("")
 print_with_hobbies_height(students)
+puts("")
+print_by_cohort(students)
