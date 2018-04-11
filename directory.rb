@@ -1,3 +1,4 @@
+require'csv.rb'
 @students = []
 
 def interactive_menu
@@ -30,7 +31,7 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      load_students
+      load_students(request_filename)
     when "9"
       exit
     else
@@ -40,7 +41,7 @@ end
 
 def save_students
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(request_filename, "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -51,12 +52,16 @@ def save_students
 end
 
 def load_students(filename)
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
+  @students = []
+  CSV.foreach(filename) do |line|
+    name, cohort = line
     add_student_to_array(name)
   end
-  file.close
+end
+
+def request_filename
+  puts "Enter file name:"
+  gets.chomp
 end
 
 def print_header
@@ -78,14 +83,10 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # get the first name
   name = STDIN.gets.chomp
-  # while the name is not empty, repeat this code
   while !name.empty? do
-    # add the student hash to the array
     add_student_to_array(name)
     puts "Now we have #{@students.count} students"
-    # get another name from the user
     name = STDIN.gets.chomp
   end
 end
@@ -106,7 +107,7 @@ def try_load_students
   end
 end
 
-try_load_students
+# try_load_students
 interactive_menu
 
 # students = [
